@@ -1,0 +1,18 @@
+# Runtime data and credentials, at any depth
+.aegis/
+recorder.key
+recorder.pub
+recorder.token
+*.pem
+*.key
+.env
+.env.*
+!.env.example
+# Build and local tooling output
+/bin/
+/coverage.out
+*.test
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store

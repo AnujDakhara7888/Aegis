@@ -1,0 +1,24 @@
+{
+  "name": "01-minimal",
+  "description": "All optional fields absent; zero epoch time and no attributes.",
+  "event": {
+    "schema_version": 1,
+    "run_id": "run-1",
+    "event_id": "event-1",
+    "sequence": 1,
+    "observed_at_unix_nano": 0,
+    "source": "AGENT",
+    "kind": "RUN_STARTED",
+    "phase": "START",
+    "payload_size": 0,
+    "policy_decision": "NONE",
+    "side_effect_class": "NONE",
+    "replay_behavior": "UNSPECIFIED",
+    "attributes": {},
+    "previous_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "event_hash": "32fac372ee4afb2c7690c6f0f6c3813935ab56e0da553ac2d5586772da5b450d"
+  },
+  "canonical_hex": "41454749532d4556454e542d563100010000000572756e2d31000000076576656e742d31000000000000000001000000000000000000000001000100040000000000000000000000000001000100010000000000",
+  "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "event_hash": "32fac372ee4afb2c7690c6f0f6c3813935ab56e0da553ac2d5586772da5b450d"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "04-unicode-order",
+  "description": "Unsigned UTF-8 key order differs from UTF-16 ordering; no normalization; maximum observed time.",
+  "event": {
+    "schema_version": 1,
+    "run_id": "unicode",
+    "event_id": "names",
+    "sequence": 1,
+    "observed_at_unix_nano": 9223372036854775807,
+    "source": "AGENT",
+    "kind": "RUN_COMPLETED",
+    "phase": "END",
+    "payload_size": 0,
+    "policy_decision": "NONE",
+    "side_effect_class": "NONE",
+    "replay_behavior": "UNSPECIFIED",
+    "attributes": {
+      "𐀀": "astral",
+      "": "private",
+      "A": "ASCII",
+      "a": "lower",
+      "é": "composed",
+      "é": "decomposed"
+    },
+    "previous_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "event_hash": "15e3f8d6d2ebaab38677a0d7270f008c661eb80ee93a924f2e28f589a9351ba0"
+  },
+  "canonical_hex": "41454749532d4556454e542d5631000100000007756e69636f6465000000056e616d65730000000000000000017fffffffffffffff0000000100020005000000000000000000000000000100010001000000000600000001410000000541534349490000000161000000056c6f7765720000000365cc810000000a6465636f6d706f73656400000002c3a900000008636f6d706f73656400000003ee8080000000077072697661746500000004f09080800000000661737472616c",
+  "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "event_hash": "15e3f8d6d2ebaab38677a0d7270f008c661eb80ee93a924f2e28f589a9351ba0"
+}

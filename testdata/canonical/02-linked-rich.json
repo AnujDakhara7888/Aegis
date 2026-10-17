@@ -1,0 +1,38 @@
+{
+  "name": "02-linked-rich",
+  "description": "All optional fields present; links to vector 1; signed -1; present zero digest/time; empty payload; UTF-8 ordering.",
+  "event": {
+    "schema_version": 1,
+    "run_id": "run-1",
+    "event_id": "event-2",
+    "sequence": 2,
+    "observed_at_unix_nano": -1,
+    "source": "PROXY",
+    "kind": "TOOL_REQUESTED",
+    "phase": "REQUEST",
+    "payload_size": 0,
+    "policy_decision": "REQUIRE_APPROVAL",
+    "side_effect_class": "IRREVERSIBLE_WRITE",
+    "replay_behavior": "NEVER",
+    "attributes": {
+      "z": "last",
+      "é": "café",
+      "a": "",
+      "é": "decomposed",
+      "emoji": "🙂\u0000"
+    },
+    "previous_event_hash": "32fac372ee4afb2c7690c6f0f6c3813935ab56e0da553ac2d5586772da5b450d",
+    "event_hash": "f9b4272e926180694361171ec3d4c2d43b545411b9278e08c31005776b0a79e6",
+    "parent_event_id": "event-1",
+    "source_instance_id": "worker-α",
+    "source_monotonic_nano": 0,
+    "input_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "output_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "payload_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "capability_id": "cap:read",
+    "idempotency_key": "invoice-42"
+  },
+  "canonical_hex": "41454749532d4556454e542d563100010000000572756e2d31000000076576656e742d3201000000076576656e742d310000000000000002ffffffffffffffff0100000009776f726b65722dceb101000000000000000000050007000201000000000000000000000000000000000000000000000000000000000000000001ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff01e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855000000000000000001000000086361703a72656164000400050005010000000a696e766f6963652d34320000000500000001610000000000000005656d6f6a6900000005f09f9982000000000365cc810000000a6465636f6d706f736564000000017a000000046c61737400000002c3a900000005636166c3a9",
+  "previous_hash": "32fac372ee4afb2c7690c6f0f6c3813935ab56e0da553ac2d5586772da5b450d",
+  "event_hash": "f9b4272e926180694361171ec3d4c2d43b545411b9278e08c31005776b0a79e6"
+}
