@@ -7,15 +7,17 @@ and an operating-system operation. Aegis aims to connect that causal history to
 capability enforcement and safe replay. The eventual local invoice demonstration
 will use deterministic mock models and simulated payments, without paid APIs.
 
-**Current stage:** Milestone 1 recorder core. This is a tested local storage
-library, not an operational service or a security boundary yet. See
+**Current stage:** Milestone 2A signed sealing. This is a tested local storage
+library with authenticated sealed-run verification, not an operational service
+or a complete security boundary yet. See
 [project state](docs/project-state.md) for executed checks and
 [tasks](docs/tasks.md) for acceptance criteria.
 
 The current slice defines validated events, a byte-level canonical encoding,
 permanent cross-language vectors, SHA-256 chaining, an append-only JSONL store,
 content-addressed payloads, full open-run verification, crash-tail recovery,
-idempotent retries, and a rebuildable derived index. Signing, HTTP, CLI, SDK,
+idempotent retries, a rebuildable derived index, Ed25519 recorder keys, atomic
+signed manifests, and expected-key sealed-run verification. HTTP, CLI, SDK,
 replay, kernel enforcement, and the UI are future milestones. There is no runnable
 invoice demo yet and no performance claim.
 
@@ -48,12 +50,12 @@ SDK. No network services or credentials are needed.
 
 ## Security model
 
-The future sealed history will be **tamper-evident relative to the recorder’s
-signing key**. A hash chain alone can be rewritten and recomputed; it does not
-authenticate history or detect suffix removal without a trusted terminal anchor.
-Signing is not implemented. Open-run verification cannot detect deletion of a
-valid terminal suffix without a trusted terminal count/hash. Neither signatures nor recording establish that the
-recorder was honest or that it captured every action.
+Sealed history is **tamper-evident relative to the expected recorder public key**.
+A hash chain alone can be rewritten and recomputed; the signed manifest supplies
+the trusted event count, terminal anchor, payload-set digest, and completion state.
+Open-run verification still cannot detect deletion of a valid terminal suffix.
+Neither signatures nor recording establish that the recorder was honest or that
+it captured every action.
 
 The recorder, host, signing key, and eventual trusted proxy/kernel are trusted.
 Agent content and tool arguments are untrusted. Compromised hosts, key theft,

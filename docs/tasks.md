@@ -32,8 +32,21 @@
 - [x] Run formatting, all tests, race detection, vet, and Python vector checks.
 - [x] Update storage/recovery docs and project-state with executed evidence.
 
-### Later milestones
+### Milestone 2A signed sealing — complete
 
-- [ ] Seal freezes appends; changed manifests and wrong expected keys fail.
+- [x] Freeze canonical manifest and blob-set bytes with Go/Python vectors.
+- [x] Implement strict manifest types, validation, JSON, signing, and verification.
+- [x] Generate and durably store a private recorder key pair with restrictive modes.
+- [x] Seal empty and populated runs atomically under the per-run append lock.
+- [x] Make equal seal retries idempotent and conflicting retries fail closed.
+- [x] Verify sealed content against a caller-supplied expected public key.
+- [x] Detect event, terminal-suffix, blob, manifest, signature, and wrong-key changes.
+- [x] Reject append and recovery after a manifest is published.
+- [x] Inject ambiguous manifest publication and lost-response failures.
+- [x] Run formatting, tests, race detection, vet, and both vector checkers.
+- [x] Update architecture, threat model, limitations, and project state.
+
+### Remaining Milestone 2 work
+
 - [ ] Authenticate non-health routes; enforce body/header/time limits.
 - [ ] End-to-end deterministic invoice trace with causal edges, mock labels.

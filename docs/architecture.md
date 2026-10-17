@@ -1,7 +1,7 @@
 # Architecture and invariants
 
-Status: Milestone 1 recorder core implemented. Service, signing, replay, and
-kernel enforcement remain future work.
+Status: Milestone 2A signed sealing implemented. Service, replay, and kernel
+enforcement remain future work.
 
 The Go Flight Recorder will accept EventInput, validate it, store payloads by
 SHA-256, assign authoritative fields, and append accepted Events. The Python agent
@@ -34,6 +34,7 @@ Invariants:
 
 Standard libraries and file storage are the reference design. SQLite, protobuf,
 React, distributed infrastructure, WASM, and OpenTelemetry are deliberately later.
-No server, manifest signer, replay engine, or enforcement boundary is implemented.
-The file store rescans authoritative state before each append; this favors a small,
-auditable reference implementation over throughput until measurements exist.
+No server, replay engine, or enforcement boundary is implemented. The manifest
+signer and verifier are library APIs. The file store rescans authoritative state
+before each append; this favors a small, auditable reference implementation over
+throughput until measurements exist.

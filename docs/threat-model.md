@@ -1,7 +1,7 @@
 # Threat model
 
-Target for the sealed-recorder milestone: detect changes to a completed run made
-by someone lacking the expected recorder private key. The expected public key must
+The sealed recorder detects changes to a completed run made by someone lacking
+the expected recorder private key. The expected public key must
 come from a separately trusted configuration, never from the run being verified.
 
 Untrusted: agent process, prompts/documents, generated content/arguments, external
@@ -17,6 +17,7 @@ not defend against a compromised local account. Payloads may contain secrets;
 content addressing is not encryption or redaction. Raw payloads are never returned
 by default in the planned API; storage permissions still matter.
 
-Precise future claim: tamper-evident relative to the recorder’s signing key.
-Current hashes are unauthenticated: an attacker may recompute a whole chain or
-remove its tail. No signature, protected execution, or completeness claim is made.
+Precise current claim: sealed runs are tamper-evident relative to the expected
+recorder public key. Open-run hashes remain unauthenticated: an attacker may
+recompute a whole chain or remove its tail. No protected execution, honest-recorder,
+or completeness claim is made.

@@ -21,9 +21,14 @@ var (
 	ErrRunExists           = errors.New("run already exists")
 	ErrRunNotFound         = errors.New("run not found")
 	ErrRunSealed           = errors.New("run is sealed")
+	ErrRunNotSealed        = errors.New("run is not sealed")
 	ErrIdempotencyConflict = errors.New("event ID conflicts with an accepted event")
 	ErrParentNotFound      = errors.New("parent event is not already accepted in this run")
 	ErrRecoveryRequired    = errors.New("run requires explicit recovery")
+	ErrSealConflict        = errors.New("run is already sealed with a different completion status")
+	ErrInvalidManifest     = errors.New("sealed manifest is invalid")
+	ErrRecorderKeyExists   = errors.New("recorder key already exists")
+	ErrRecorderKeyMissing  = errors.New("recorder key is missing or incomplete")
 )
 
 // Store assumes it is the only Store process writing its root. It serializes
@@ -45,10 +50,12 @@ type runState struct {
 }
 
 type testHooks struct {
-	writeLog     func(*os.File, []byte) error
-	syncLog      func(*os.File) error
-	afterLogSync func(event.Event) error
-	writeIndex   func(string, Index) error
+	writeLog          func(*os.File, []byte) error
+	syncLog           func(*os.File) error
+	afterLogSync      func(event.Event) error
+	writeIndex        func(string, Index) error
+	writeManifest     func(string, []byte) error
+	afterManifestSync func() error
 }
 
 // Open creates or opens a private Aegis data root and its shared directories.

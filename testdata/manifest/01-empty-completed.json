@@ -1,0 +1,22 @@
+{
+  "name": "01-empty-completed",
+  "description": "Empty completed run with zero time and no referenced blobs.",
+  "manifest": {
+    "manifest_schema_version": 1,
+    "run_id": "run-empty",
+    "event_schema_version": 1,
+    "event_count": 0,
+    "first_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "terminal_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "referenced_blob_set_digest": "f1ece4f4c892513a88bb4ed68c7d7bb4b758499e62032201e3da55494ad5952a",
+    "completion_status": "COMPLETED",
+    "sealed_at_unix_nano": 0,
+    "recorder_public_key_fingerprint": "56475aa75463474c0285df5dbf2bcab73da651358839e9b77481b2eab107708c",
+    "signature_algorithm": "ED25519",
+    "signature": "yc+HOBKJ5+gTUh8hgd8oKBc0kKmztr9jfFiH+wxAF3H936Sw9/kMugIaV9SWXko289zZbYuVdd57CneevJIOCg=="
+  },
+  "referenced_blob_hashes": [],
+  "blob_set_digest": "f1ece4f4c892513a88bb4ed68c7d7bb4b758499e62032201e3da55494ad5952a",
+  "canonical_hex": "41454749532d4d414e49464553542d563100010000000972756e2d656d7074790001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f1ece4f4c892513a88bb4ed68c7d7bb4b758499e62032201e3da55494ad5952a0001000000000000000056475aa75463474c0285df5dbf2bcab73da651358839e9b77481b2eab107708c0001",
+  "public_key_hex": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8"
+}

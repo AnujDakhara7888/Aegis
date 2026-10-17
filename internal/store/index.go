@@ -2,6 +2,7 @@ package store
 
 import (
 	"bytes"
+	"crypto/ed25519"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -42,6 +43,26 @@ func (s *Store) RebuildIndex(runID string) (Index, error) {
 	index := indexFromReport(report)
 	if err := s.writeIndex(runID, index); err != nil {
 		return Index{}, fmt.Errorf("write rebuilt index: %w", err)
+	}
+	return index, nil
+}
+
+// RebuildSealedIndex first authenticates sealed authoritative state against the
+// caller's expected key, then atomically replaces only the derived index.
+func (s *Store) RebuildSealedIndex(runID string, expectedPublicKey ed25519.PublicKey) (Index, error) {
+	if err := event.ValidateID(runID); err != nil {
+		return Index{}, fmt.Errorf("run ID: %w", err)
+	}
+	state := s.state(runID)
+	state.mu.Lock()
+	defer state.mu.Unlock()
+	_, report, err := s.verifySealedLocked(runID, expectedPublicKey)
+	if err != nil {
+		return Index{}, err
+	}
+	index := indexFromReport(report)
+	if err := s.writeIndex(runID, index); err != nil {
+		return Index{}, fmt.Errorf("write rebuilt sealed index: %w", err)
 	}
 	return index, nil
 }

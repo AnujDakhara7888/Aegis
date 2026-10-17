@@ -1,5 +1,5 @@
-// Package verify validates authoritative open-run logs and referenced payloads.
-// It does not verify sealed manifests, whose format and signatures are deferred.
+// Package verify validates authoritative event logs and referenced payloads.
+// Signature verification is performed by the manifest/store layer with a pinned key.
 package verify
 
 import (
@@ -22,7 +22,7 @@ var (
 	ErrCorrupt          = errors.New("run is corrupt")
 	ErrRecoveryRequired = errors.New("run requires recovery")
 	ErrRunNotFound      = errors.New("run not found")
-	ErrSealedRun        = errors.New("sealed-run verification is not implemented")
+	ErrSealedRun        = errors.New("run is sealed; use sealed-run verification")
 )
 
 // Record describes an authoritative event's position in events.jsonl.
@@ -41,24 +41,32 @@ type Report struct {
 
 // Verify checks an open run without modifying any file.
 func Verify(root, runID string) (Report, error) {
-	return scan(root, runID, false)
+	return scan(root, runID, false, false)
 }
 
 // Recover checks an open run and repairs only a parser-confirmed incomplete final
 // fragment or a complete valid final event that lacks its newline delimiter.
 func Recover(root, runID string) (Report, error) {
-	return scan(root, runID, true)
+	return scan(root, runID, true, false)
 }
 
-func scan(root, runID string, repair bool) (Report, error) {
+// VerifySealedContent validates event and blob state while permitting the caller
+// to verify the already-present manifest separately against an expected key.
+func VerifySealedContent(root, runID string) (Report, error) {
+	return scan(root, runID, false, true)
+}
+
+func scan(root, runID string, repair, allowManifest bool) (Report, error) {
 	if err := event.ValidateID(runID); err != nil {
 		return Report{}, fmt.Errorf("run ID: %w", err)
 	}
 	runDir := filepath.Join(root, "runs", runID)
-	if _, err := os.Stat(filepath.Join(runDir, "manifest.json")); err == nil {
-		return Report{}, ErrSealedRun
-	} else if !errors.Is(err, os.ErrNotExist) {
-		return Report{}, fmt.Errorf("inspect manifest: %w", err)
+	if !allowManifest {
+		if _, err := os.Stat(filepath.Join(runDir, "manifest.json")); err == nil {
+			return Report{}, ErrSealedRun
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return Report{}, fmt.Errorf("inspect manifest: %w", err)
+		}
 	}
 
 	flags := os.O_RDONLY

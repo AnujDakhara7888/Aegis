@@ -4,7 +4,7 @@
 |---|---|
 | 0 Project contract — complete | Scaffold, explicit invariants, byte specifications, threat model, ADRs and task list |
 | 1 Recorder core — complete | Validated events, canonical vectors, hash chain, durable log/blob store, rebuildable index, recovery, verifier and fault tests |
-| 2 Local service/demo | Loopback authenticated HTTP, CLI, Python SDK, deterministic invoice agent, Ed25519 seal and end-to-end one-command demo |
+| 2 Local service/demo — sealing complete | Ed25519 seal complete; remaining: loopback authenticated HTTP, CLI, Python SDK, deterministic invoice agent and end-to-end one-command demo |
 | 3 Thin AgentOS | Inspect supplied SBUnix source, implement minimal filesystem denial, audit bridge and causal cross-layer demo |
 | 4 Replay/forking | Side-effect journal, recorded results, checkpoints/resume, lineage, substitutions, first divergence and fault injection |
 | 5 Broader authority | Delegation/attenuation/revocation, CPU/memory budgets, proxy, token/tool/payment budgets and scoped approvals |

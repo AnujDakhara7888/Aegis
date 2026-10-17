@@ -10,7 +10,7 @@ The file-backed store implements the following behavior for unsealed runs:
 | After complete line, before fsync/ack | Valid event may exist; retry must find same event ID |
 | After fsync, before response | Event is durable; identical retry returns original |
 | During index update | Ignore/rebuild derived index |
-| During manifest publication | Deferred to the signing milestone |
+| During manifest publication | Retry verifies and returns a valid published manifest; invalid state fails closed |
 
 Scan complete newline-delimited records and validate every one. Never skip a bad
 middle line. A newline-terminated malformed record is corruption, even at the tail.
@@ -34,6 +34,7 @@ recovery. A failed request may nevertheless have committed; retries resolve this
 Process-crash tests are not proof of power-loss durability on all filesystems.
 
 The tests inject partial append, log synchronization failure, derived-index failure,
-and response loss after successful synchronization. They also construct incomplete,
-complete-without-newline, complete-invalid, and malformed tails. Actual power-loss
-testing and filesystem-specific durability characterization remain future work.
+ambiguous manifest publication, and response loss after successful synchronization.
+They also construct incomplete, complete-without-newline, complete-invalid, and
+malformed tails. Actual power-loss testing and filesystem-specific durability
+characterization remain future work.
