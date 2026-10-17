@@ -16,13 +16,24 @@
 - [x] Record actual results, limitations, commit sequence and next task.
 
 ## Remaining recorder acceptance tests (future)
-- [ ] Preserve event order on append/reopen; serialize concurrent appends.
-- [ ] Verify a clean chain and detect modification/deletion/reordering.
-- [ ] Verify blob sizes/digests; detect replacement and missing blobs.
-- [ ] Recover only incomplete final tails; reject complete invalid records.
-- [ ] Delete/rebuild index with no information loss.
-- [ ] Equal retries return original event; conflicting IDs fail.
-- [ ] Inject write/sync/ack failures; no acknowledged event may go missing.
+
+### Milestone 1 storage slice — complete
+
+- [x] Implement strict read-only verification for open logs and referenced blobs.
+- [x] Classify incomplete, complete-without-newline, and corrupt final records.
+- [x] Implement explicit recovery without discarding complete invalid records.
+- [x] Publish content-addressed payloads with file and directory synchronization.
+- [x] Serialize per-run appends and assign authoritative recorder fields.
+- [x] Return identical event-ID retries and reject conflicting retries.
+- [x] Build and atomically replace a fully derived index.
+- [x] Reopen runs and rebuild a deleted or invalid index from authoritative state.
+- [x] Test concurrent ordering, parent rules, mutation, deletion, and reordering.
+- [x] Test missing/replaced blobs, partial writes, sync failure, and lost response.
+- [x] Run formatting, all tests, race detection, vet, and Python vector checks.
+- [x] Update storage/recovery docs and project-state with executed evidence.
+
+### Later milestones
+
 - [ ] Seal freezes appends; changed manifests and wrong expected keys fail.
 - [ ] Authenticate non-health routes; enforce body/header/time limits.
 - [ ] End-to-end deterministic invoice trace with causal edges, mock labels.

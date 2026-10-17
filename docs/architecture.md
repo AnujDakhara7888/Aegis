@@ -1,6 +1,7 @@
 # Architecture and invariants
 
-Status: contract; only event, canonical, and chain primitives are in this session.
+Status: Milestone 1 recorder core implemented. Service, signing, replay, and
+kernel enforcement remain future work.
 
 The Go Flight Recorder will accept EventInput, validate it, store payloads by
 SHA-256, assign authoritative fields, and append accepted Events. The Python agent
@@ -17,7 +18,7 @@ writer until a tested exclusion mechanism exists.
 
 Invariants:
 1. Accepted sequences are contiguous from one within a run, under a per-run lock.
-2. Parent ID denotes causality, not physical adjacency. The future store requires
+2. Parent ID denotes causality, not physical adjacency. The store requires
    a parent to be an already accepted event in that run; cross-run lineage is later.
 3. Server time is human context, not monotonic ordering. Source-local monotonic
    time requires a source instance and cannot order across processes/restarts.
@@ -33,4 +34,6 @@ Invariants:
 
 Standard libraries and file storage are the reference design. SQLite, protobuf,
 React, distributed infrastructure, WASM, and OpenTelemetry are deliberately later.
-No server, storage, manifest signer, or replay engine is implemented in this slice.
+No server, manifest signer, replay engine, or enforcement boundary is implemented.
+The file store rescans authoritative state before each append; this favors a small,
+auditable reference implementation over throughput until measurements exist.

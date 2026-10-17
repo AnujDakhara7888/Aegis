@@ -1,6 +1,6 @@
 # ADR 0003: File-backed authority and explicit trust
 
-Status: accepted design; storage and signing implementation deferred.
+Status: accepted; open-run storage implemented, signing deferred.
 
 Context: durable acknowledgement, index rebuilding and authenticating sealed runs
 must be designed before a storage engine or API is introduced.

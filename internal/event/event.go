@@ -127,6 +127,15 @@ func validID(s string) bool {
 	}
 	return true
 }
+
+// ValidateID reports whether s is a safe schema-v1 run or event identifier.
+// IDs are deliberately path-separator-free because run IDs become directory names.
+func ValidateID(s string) error {
+	if !validID(s) {
+		return fmt.Errorf("invalid identifier")
+	}
+	return nil
+}
 func validString(s string, min, max int) bool {
 	return len(s) >= min && len(s) <= max && utf8.ValidString(s)
 }
